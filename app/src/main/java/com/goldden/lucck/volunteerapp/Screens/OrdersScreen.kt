@@ -40,15 +40,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.goldden.lucck.volunteerapp.Models.OrderCardModel
 import com.goldden.lucck.volunteerapp.R
 import orderList
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun OrderScreen() {
+fun OrderScreen(navController: NavController) {
 
 
     Scaffold(
@@ -69,7 +69,7 @@ fun OrderScreen() {
         content = {
             padding ->
             Box(modifier = Modifier.padding(padding)) {
-                OrderList(orders = orderList)
+                OrderList(orders = orderList, navController)
             }
         }
     )
@@ -77,21 +77,23 @@ fun OrderScreen() {
 }
 
 @Composable
-fun OrderList(orders: List<OrderCardModel>, ) {
+fun OrderList(orders: List<OrderCardModel>, navController: NavController) {
     LazyColumn {
         items(orders) { order ->
-            OrderCard(order = order)
+            OrderCard(order = order) { navController.navigate(route = "DetailScreen/${order.id}") }
             Spacer(modifier = Modifier.height(8.dp)) // Add some spacing between cards
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OrderCard(order: OrderCardModel) {
+fun OrderCard(order: OrderCardModel,  onClickDetail : () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        onClick = onClickDetail
     ) {
         Row(
             modifier = Modifier.padding(16.dp),

@@ -21,12 +21,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.goldden.lucck.volunteerapp.Graphs.HomeNavGraph
 import com.goldden.lucck.volunteerapp.Graphs.ListOfScreens
 import com.goldden.lucck.volunteerapp.Navigation.BottomNavigation
+import com.goldden.lucck.volunteerapp.Screens.OrderDetailScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderScreen
 import com.goldden.lucck.volunteerapp.ui.theme.VolunteerAppTheme
 
@@ -110,10 +113,19 @@ fun BottomNavigationBar() {
 
             }
             composable(ListOfScreens.Orders.name) {
-                OrderScreen()
+                OrderScreen(navController)
             }
             composable(ListOfScreens.SubmitOrder.name) {
 
+            }
+            composable("${ListOfScreens.DetailScreen.name}/{index}", arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )
+            ){
+                    index ->
+                index.arguments?.let { OrderDetailScreen(it.getInt("index")) }
             }
         }
     }

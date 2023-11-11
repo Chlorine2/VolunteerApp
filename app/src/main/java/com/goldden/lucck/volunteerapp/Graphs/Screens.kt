@@ -4,5 +4,6 @@ enum class ListOfScreens(){
     Profile(),
     CreateOrder(),
     Orders(),
-    SubmitOrder()
+    SubmitOrder(),
+    DetailScreen(),
 }
