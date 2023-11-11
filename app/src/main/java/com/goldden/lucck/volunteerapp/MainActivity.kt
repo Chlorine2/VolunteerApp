@@ -33,6 +33,7 @@ import com.goldden.lucck.volunteerapp.Screens.CreateOrderScreen
 import com.goldden.lucck.volunteerapp.Screens.MainScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderDetailScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderScreen
+import com.goldden.lucck.volunteerapp.Screens.ProfileScreen
 import com.goldden.lucck.volunteerapp.ui.theme.VolunteerAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -120,7 +121,7 @@ fun BottomNavigationBar() {
             }
 
             composable(ListOfScreens.Profile.name) {
-
+                ProfileScreen()
             }
             composable(ListOfScreens.TrackOrder.name) {
 
