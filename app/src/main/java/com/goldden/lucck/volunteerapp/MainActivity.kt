@@ -29,6 +29,8 @@ import androidx.navigation.navArgument
 import com.goldden.lucck.volunteerapp.Graphs.HomeNavGraph
 import com.goldden.lucck.volunteerapp.Graphs.ListOfScreens
 import com.goldden.lucck.volunteerapp.Navigation.BottomNavigation
+import com.goldden.lucck.volunteerapp.Screens.CreateOrderScreen
+import com.goldden.lucck.volunteerapp.Screens.MainScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderDetailScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderScreen
 import com.goldden.lucck.volunteerapp.ui.theme.VolunteerAppTheme
@@ -114,7 +116,7 @@ fun BottomNavigationBar() {
                 OrderScreen(navController)
             }
             composable(ListOfScreens.CreateOrder.name){
-
+                MainScreen()
             }
 
             composable(ListOfScreens.Profile.name) {

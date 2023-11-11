@@ -1,10 +1,222 @@
 package com.goldden.lucck.volunteerapp.Screens
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Send
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.goldden.lucck.volunteerapp.Models.OrderCardModel
+import com.goldden.lucck.volunteerapp.R
 
-@Preview(showBackground = true)
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateOrderScreen() {
+fun CreateOrderScreen(onAddOrder: (OrderCardModel) -> Unit) {
+    var name by remember { mutableStateOf("") }
+    var photo by remember { mutableStateOf(0) }
+    var description by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_6),
+                    contentDescription = "Name",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Description") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_4),
+                    contentDescription = "Description",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+        OutlinedTextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Text("City") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_3),
+                    contentDescription = "City",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        PhotoPicker()
+
+        Button(
+            onClick = {
+
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = RoundedCornerShape(10.dp)
+
+        ) {
+            Icon(imageVector = Icons.Default.Send, contentDescription = "Add Order")
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Add Order")
+        }
+    }
+}
+
+
+@Composable
+fun MainScreen() {
+    var orders by remember { mutableStateOf(emptyList<OrderCardModel>()) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        // Wrap the CreateOrderScreen invocation in a Composable function
+        CreateOrderScreen(onAddOrder = { order ->
+            // Update the list of orders
+            orders = orders + order
+        })
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        orders.forEach { order ->
+            OrderCard(order = order)
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+    }
+}
+
+
+@Composable
+fun OrderCard(order: OrderCardModel) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(120.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            // Display order information
+            Image(
+                painter = painterResource(id = order.photo),
+                contentDescription = "Order Photo",
+                modifier = Modifier
+                    .size(64.dp) // Adjust the size here
+                    .clip(MaterialTheme.shapes.medium)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column {
+                Text(text = order.name, style = MaterialTheme.typography.bodySmall)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = order.description)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = order.city)
+            }
+        }
+    }
+}
+
+
+@Composable
+fun PhotoPicker(){
+    var uri by remember{
+        mutableStateOf<Uri?>(null)
+    }
+
+    var PhotoPicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = {
+            uri = it
+        })
+
+
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        OutlinedButtonExample(
+            { PhotoPicker.launch(
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                )
+            }
+        )
+    }
+
+    AsyncImage(
+        model = uri,
+        contentDescription = null,
+        modifier = Modifier.size(248.dp),
+        contentScale = ContentScale.Crop
+
+    )
 
 }
+
+@Composable
+fun OutlinedButtonExample(onClick: () -> Unit) {
+    OutlinedButton(
+        onClick = { onClick() },
+        modifier = Modifier
+            .fillMaxWidth() // Adjust the width as needed
+            .height(56.dp), // Adjust the height as needed
+    shape = RoundedCornerShape(10.dp)
+    ) {
+        Text(
+            "Add Photo",
+            fontSize = 18.sp, // Adjust the text size as needed
+        )
+    }
+}
+

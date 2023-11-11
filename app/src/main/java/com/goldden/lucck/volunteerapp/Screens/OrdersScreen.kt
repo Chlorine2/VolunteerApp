@@ -74,6 +74,7 @@ fun OrderScreen(navController: NavController) {
                             painter = painterResource(id = R.drawable.img_2),
                             contentDescription = "Track"
                         )
+
                     }
                 }
             )
@@ -147,6 +148,13 @@ fun OrderCard(order: OrderCardModel,  onClickDetail : () -> Unit) {
 
 
                 Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = order.city, // Use data from OrderCardModel
+                    fontSize = 16.sp,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Spacer(modifier = Modifier.height(4.dp))
 
                 OutlinedButton(
                     shape = RoundedCornerShape(8.dp),
@@ -154,6 +162,7 @@ fun OrderCard(order: OrderCardModel,  onClickDetail : () -> Unit) {
                         contentColor = Color.Black,
                         containerColor = Color.White
                     ),
+
                     onClick = { /*TODO*/ }
                 ) {
                     Text(
