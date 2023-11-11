@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,8 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,23 +40,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.goldden.lucck.volunteerapp.OrderModel.OrderCardModel
+import com.goldden.lucck.volunteerapp.Models.OrderCardModel
 import com.goldden.lucck.volunteerapp.R
+import orderList
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 fun OrderScreen() {
-    val orderList = remember {
-        listOf(
-            OrderCardModel("Order 1", R.drawable.img, "Description for Order 1"),
-            OrderCardModel("Order 2", R.drawable.img_1, "Description for Order 2"),
-            OrderCardModel("Order 2", R.drawable.img_1, "Description for Order 2"),
-            OrderCardModel("Order 2", R.drawable.img_1, "Description for Order 2"),
-            // Add more orders as needed
-        )
-    }
+
 
     Scaffold(
         topBar = {
@@ -85,9 +75,6 @@ fun OrderScreen() {
     )
 
 }
-
-
-
 
 @Composable
 fun OrderList(orders: List<OrderCardModel>, ) {
@@ -177,6 +164,11 @@ fun OrderCard(order: OrderCardModel) {
         }
     }
 }
+
+
+
+
+
 
 
 
