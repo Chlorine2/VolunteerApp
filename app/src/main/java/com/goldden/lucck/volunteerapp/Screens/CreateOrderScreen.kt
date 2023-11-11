@@ -37,74 +37,68 @@ fun CreateOrderScreen(onAddOrder: (OrderCardModel) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.SpaceBetween
+            .padding(16.dp)
     ) {
-        Column {
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_6),
+                    contentDescription = "Name",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
 
 
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Name") },
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.img_6),
-                        contentDescription = "Name",
-                        modifier = Modifier.size(24.dp) // Adjust the size here
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            )
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Description") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_4),
+                    contentDescription = "Description",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
 
+        OutlinedTextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Text("City") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_3),
+                    contentDescription = "City",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
 
-            OutlinedTextField(
-                value = description,
-                onValueChange = { description = it },
-                label = { Text("Description") },
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.img_4),
-                        contentDescription = "Description",
-                        modifier = Modifier.size(24.dp) // Adjust the size here
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            )
+        Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedTextField(
-                value = city,
-                onValueChange = { city = it },
-                label = { Text("City") },
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.img_3),
-                        contentDescription = "City",
-                        modifier = Modifier.size(24.dp) // Adjust the size here
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            )
+        PhotoPicker()
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            PhotoPicker()
-        }
         Button(
             onClick = {
 
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp)
-                .weight(1f, false)
-        ,
+                .height(56.dp),
             shape = RoundedCornerShape(10.dp)
 
         ) {
@@ -112,7 +106,6 @@ fun CreateOrderScreen(onAddOrder: (OrderCardModel) -> Unit) {
             Spacer(modifier = Modifier.width(8.dp))
             Text("Add Order")
         }
-
     }
 }
 
@@ -201,7 +194,13 @@ fun PhotoPicker(){
         )
     }
 
+    AsyncImage(
+        model = uri,
+        contentDescription = null,
+        modifier = Modifier.size(248.dp),
+        contentScale = ContentScale.Crop
 
+    )
 
 }
 
