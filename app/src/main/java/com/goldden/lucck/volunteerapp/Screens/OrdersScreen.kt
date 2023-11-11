@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,6 +30,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -106,8 +109,9 @@ fun OrderCard(order: OrderCardModel,  onClickDetail : () -> Unit) {
             .fillMaxWidth()
             .padding(10.dp),
         shape = RoundedCornerShape(16.dp),
-        onClick = onClickDetail
-    ) {
+        onClick = onClickDetail,
+
+           ) {
         Row(
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -121,13 +125,13 @@ fun OrderCard(order: OrderCardModel,  onClickDetail : () -> Unit) {
                 Surface(
                     shape = RoundedCornerShape(24.dp),
                     modifier = Modifier.wrapContentSize(),
-                    color = MaterialTheme.colorScheme.secondary
+                    color = MaterialTheme.colorScheme.primary
                 ) {
                     Text(
                         text = "New release",
                         fontSize = 12.sp,
                         style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+                        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp),
                     )
                 }
 

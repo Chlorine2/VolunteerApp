@@ -7,5 +7,7 @@ data class OrderCardModel(
     val photo: Int,
     val description: String,
     val id: Int,
-    val city: String
+    val city: String,
+    val owned: Boolean,
+    val submitted : Boolean
 )
