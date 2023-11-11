@@ -41,6 +41,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.goldden.lucck.volunteerapp.Graphs.ListOfScreens
 import com.goldden.lucck.volunteerapp.Models.OrderCardModel
 import com.goldden.lucck.volunteerapp.R
 import orderList
@@ -63,11 +65,21 @@ fun OrderScreen(navController: NavController) {
                     ) {
                         Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
                     }
+                    IconButton(
+                        onClick = {
+                            navController.navigate(ListOfScreens.TrackOrder.name)
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.img_2),
+                            contentDescription = "Track"
+                        )
+                    }
                 }
             )
         },
         content = {
-            padding ->
+                padding ->
             Box(modifier = Modifier.padding(padding)) {
                 OrderList(orders = orderList, navController)
             }

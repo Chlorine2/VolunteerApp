@@ -2,6 +2,7 @@ package com.goldden.lucck.volunteerapp.Navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Notifications
@@ -25,15 +26,17 @@ data class BottomNavigation(
                 route = ListOfScreens.Orders.name
             ),
             BottomNavigation(
-                label = "Submit Order",
-                icon = Icons.Filled.Notifications,
-                route = ListOfScreens.SubmitOrder.name
+                label = "Create Order",
+                icon = Icons.Filled.Create,
+                route = ListOfScreens.CreateOrder.name
             ),
+
             BottomNavigation(
                 label = "Profile",
                 icon = Icons.Filled.Person,
                 route = ListOfScreens.Profile.name
             ),
+
         )
     }
 }

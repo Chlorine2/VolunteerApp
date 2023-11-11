@@ -109,13 +109,18 @@ fun BottomNavigationBar() {
             navController = navController,
             startDestination = ListOfScreens.Orders.name,
             modifier = Modifier.padding(paddingValues = paddingValues)) {
-            composable(ListOfScreens.Profile.name) {
 
-            }
             composable(ListOfScreens.Orders.name) {
                 OrderScreen(navController)
             }
-            composable(ListOfScreens.SubmitOrder.name) {
+            composable(ListOfScreens.CreateOrder.name){
+
+            }
+
+            composable(ListOfScreens.Profile.name) {
+
+            }
+            composable(ListOfScreens.TrackOrder.name) {
 
             }
             composable("${ListOfScreens.DetailScreen.name}/{index}", arguments = listOf(
@@ -127,6 +132,7 @@ fun BottomNavigationBar() {
                     index ->
                 index.arguments?.let { OrderDetailScreen(it.getInt("index")) }
             }
+
         }
     }
 }

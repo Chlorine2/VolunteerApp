@@ -6,4 +6,5 @@ enum class ListOfScreens(){
     Orders(),
     SubmitOrder(),
     DetailScreen(),
+    TrackOrder()
 }
