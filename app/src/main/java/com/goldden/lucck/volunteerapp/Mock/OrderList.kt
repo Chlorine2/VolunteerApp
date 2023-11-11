@@ -8,5 +8,4 @@ val orderList =
         OrderCardModel("Order 2", R.drawable.img_1, "Description for Order 2", 2),
         OrderCardModel("Order 2", R.drawable.img_1, "Description for Order 2", 3),
         OrderCardModel("Order 2", R.drawable.img_1, "Description for Order 2",4),
-        // Add more orders as needed
     )
