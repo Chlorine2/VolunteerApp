@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.goldden.lucck.volunteerapp.Graphs.ListOfScreens
@@ -36,7 +37,11 @@ data class BottomNavigation(
                 icon = Icons.Filled.Person,
                 route = ListOfScreens.Profile.name
             ),
-
+            BottomNavigation(
+                label = "Monkey",
+                icon = Icons.Filled.PlayArrow,
+                route = ListOfScreens.Monkey.name
+            ),
         )
     }
 }

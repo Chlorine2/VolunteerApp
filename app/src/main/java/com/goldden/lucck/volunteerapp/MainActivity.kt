@@ -31,6 +31,7 @@ import com.goldden.lucck.volunteerapp.Graphs.ListOfScreens
 import com.goldden.lucck.volunteerapp.Navigation.BottomNavigation
 import com.goldden.lucck.volunteerapp.Screens.CreateOrderScreen
 import com.goldden.lucck.volunteerapp.Screens.MainScreen
+import com.goldden.lucck.volunteerapp.Screens.MonkeyScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderDetailScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderScreen
 import com.goldden.lucck.volunteerapp.Screens.ProfileScreen
@@ -134,6 +135,9 @@ fun BottomNavigationBar() {
             ){
                     index ->
                 index.arguments?.let { OrderDetailScreen(it.getInt("index")) }
+            }
+            composable(ListOfScreens.Monkey.name) {
+                MonkeyScreen()
             }
 
         }
