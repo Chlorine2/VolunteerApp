@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.goldden.lucck.volunteerapp.MainActivity
 import com.goldden.lucck.volunteerapp.Models.OrderCardModel
+import com.goldden.lucck.volunteerapp.Models.TaskModel
 import com.goldden.lucck.volunteerapp.R
 
 var bitmapList: MutableList<Bitmap> = mutableListOf()
@@ -34,107 +35,50 @@ var bitmapList: MutableList<Bitmap> = mutableListOf()
 @Composable
 
 fun CreateOrderScreen(onAddOrder: (OrderCardModel) -> Unit) {
-    var name by remember { mutableStateOf("") }
-    var photo by remember { mutableStateOf(0) }
-    var description by remember { mutableStateOf("") }
-    var city by remember { mutableStateOf("") }
 
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Name") },
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.img_6),
-                    contentDescription = "Name",
-                    modifier = Modifier.size(24.dp) // Adjust the size here
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        )
-
-
-        OutlinedTextField(
-            value = description,
-            onValueChange = { description = it },
-            label = { Text("Description") },
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.img_4),
-                    contentDescription = "Description",
-                    modifier = Modifier.size(24.dp) // Adjust the size here
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        )
-
-        OutlinedTextField(
-            value = city,
-            onValueChange = { city = it },
-            label = { Text("City") },
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.img_3),
-                    contentDescription = "City",
-                    modifier = Modifier.size(24.dp) // Adjust the size here
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-        Column(        Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceBetween) {
-            PhotoPicker()
-            Button(
-                onClick = {
-
-                },
-                modifier = Modifier
-
-                    .fillMaxWidth()
-                    .height(56.dp)
-                    .weight(1f, false)
-                ,
-                shape = RoundedCornerShape(10.dp)
-
-            ) {
-                Icon(imageVector = Icons.Default.Send, contentDescription = "Add Order")
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("Add Order")
-            }
-        }
-
-    }
 }
 
 
 @Composable
 fun MainScreen() {
     var orders by remember { mutableStateOf(emptyList<OrderCardModel>()) }
+    var selectedTabIndex by remember { mutableStateOf(0) }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Wrap the CreateOrderScreen invocation in a Composable function
-        CreateOrderScreen(onAddOrder = { order ->
-            // Update the list of orders
-            orders = orders + order
-        })
+        // Add TabRow for tasks and orders
+        TabRow(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.primary),
+            selectedTabIndex = selectedTabIndex,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+
+        ) {
+            Tab(
+                selected = selectedTabIndex == 0,
+                onClick = { selectedTabIndex = 0 },
+                text = { Text("Create Task") }
+            )
+            Tab(
+                selected = selectedTabIndex == 1,
+                onClick = { selectedTabIndex = 1 },
+                text = { Text("Create Order") }
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Display content based on selected tab index
+        when (selectedTabIndex) {
+            0 -> CreateTask(onAddTask = { /* Handle task addition */ })
+            1 -> CreateOrder(onAddOrder = { order ->
+                // Update the list of orders
+                orders = orders + order
+            })
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -233,3 +177,212 @@ fun OutlinedButtonExample(onClick: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CreateOrder(onAddOrder: (OrderCardModel) -> Unit){
+    var name by remember { mutableStateOf("") }
+    var photo by remember { mutableStateOf(0) }
+    var description by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_6),
+                    contentDescription = "Name",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Description") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_4),
+                    contentDescription = "Description",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+        OutlinedTextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Text("Sender city") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_3),
+                    contentDescription = "City",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+        OutlinedTextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Text("Recipient City") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_3),
+                    contentDescription = "City",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Column(        Modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.SpaceBetween) {
+            PhotoPicker()
+            Button(
+                onClick = {
+
+                },
+                modifier = Modifier
+
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .weight(1f, false)
+                ,
+                shape = RoundedCornerShape(10.dp)
+
+            ) {
+                Icon(imageVector = Icons.Default.Send, contentDescription = "Add Order")
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Add Order")
+            }
+        }
+
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CreateTask(onAddTask: (TaskModel) -> Unit){
+    var name by remember { mutableStateOf("") }
+    var photo by remember { mutableStateOf(0) }
+    var description by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_6),
+                    contentDescription = "Name",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Description") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_4),
+                    contentDescription = "Description",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+        OutlinedTextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Text("City") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_3),
+                    contentDescription = "City",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+        OutlinedTextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Text("Price") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.img_3),
+                    contentDescription = "Price",
+                    modifier = Modifier.size(24.dp) // Adjust the size here
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Column(        Modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.SpaceBetween) {
+            PhotoPicker()
+            Button(
+                onClick = {
+
+                },
+                modifier = Modifier
+
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .weight(1f, false)
+                ,
+                shape = RoundedCornerShape(10.dp)
+
+            ) {
+                Icon(imageVector = Icons.Default.Send, contentDescription = "Add Order")
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Add Order")
+            }
+        }
+
+    }
+}

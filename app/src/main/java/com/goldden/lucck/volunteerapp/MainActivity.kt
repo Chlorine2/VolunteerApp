@@ -35,6 +35,7 @@ import com.goldden.lucck.volunteerapp.Screens.MonkeyScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderDetailScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderScreen
 import com.goldden.lucck.volunteerapp.Screens.ProfileScreen
+import com.goldden.lucck.volunteerapp.Screens.TrackOrderScreen
 import com.goldden.lucck.volunteerapp.ui.theme.VolunteerAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -125,7 +126,7 @@ fun BottomNavigationBar() {
                 ProfileScreen()
             }
             composable(ListOfScreens.TrackOrder.name) {
-
+                TrackOrderScreen()
             }
             composable("${ListOfScreens.DetailScreen.name}/{index}", arguments = listOf(
                 navArgument(name = "index"){
