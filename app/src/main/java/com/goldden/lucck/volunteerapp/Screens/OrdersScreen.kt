@@ -90,8 +90,10 @@ fun OrderScreen(navController: NavController) {
 fun OrderList(orders: List<OrderCardModel>, navController: NavController) {
     LazyColumn {
         items(orders) { order ->
-            OrderCard(order = order) { navController.navigate(route = "DetailScreen/${order.id}") }
-            Spacer(modifier = Modifier.height(8.dp)) // Add some spacing between cards
+            if(!order.owned) {
+                OrderCard(order = order) { navController.navigate(route = "DetailScreen/${order.id}") }
+                Spacer(modifier = Modifier.height(8.dp)) // Add some spacing between cards
+            }
         }
     }
 }

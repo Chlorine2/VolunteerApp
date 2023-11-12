@@ -1,13 +1,14 @@
 package com.goldden.lucck.volunteerapp.Screens
 
+import android.graphics.Bitmap
 import android.net.Uri
+import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
@@ -16,14 +17,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.goldden.lucck.volunteerapp.MainActivity
 import com.goldden.lucck.volunteerapp.Models.OrderCardModel
 import com.goldden.lucck.volunteerapp.R
 
+var bitmapList: MutableList<Bitmap> = mutableListOf()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -174,7 +177,7 @@ fun PhotoPicker(){
         mutableStateOf<Uri?>(null)
     }
 
-    var PhotoPicker = rememberLauncherForActivityResult(
+    val PhotoPicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = {
             uri = it
@@ -197,10 +200,12 @@ fun PhotoPicker(){
     AsyncImage(
         model = uri,
         contentDescription = null,
-        modifier = Modifier.size(248.dp),
+        modifier = Modifier.size(0.dp),
         contentScale = ContentScale.Crop
 
     )
+
+
 
 }
 

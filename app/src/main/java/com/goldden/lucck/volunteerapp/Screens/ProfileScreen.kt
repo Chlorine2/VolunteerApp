@@ -111,8 +111,10 @@ fun ProfileScreen(){
         )
         LazyColumn {
             items(orderList) { order ->
-                SmallOrderCard(order = order) {
-                    // Handle click on small order card
+                if(order.owned) {
+                    SmallOrderCard(order = order) {
+                        // Handle click on small order card
+                    }
                 }
             }
         }
