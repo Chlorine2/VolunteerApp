@@ -95,24 +95,28 @@ fun CreateOrderScreen(onAddOrder: (OrderCardModel) -> Unit) {
         )
 
         Spacer(modifier = Modifier.height(16.dp))
+        Column(        Modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.SpaceBetween) {
+            PhotoPicker()
+            Button(
+                onClick = {
 
-        PhotoPicker()
-        Spacer(modifier = Modifier.height(356.dp))
-        Button(
-            onClick = {
+                },
+                modifier = Modifier
 
-            },
-            modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .weight(1f, false)
+                ,
+                shape = RoundedCornerShape(10.dp)
 
-                .fillMaxWidth()
-                .height(56.dp),
-            shape = RoundedCornerShape(10.dp)
-
-        ) {
-            Icon(imageVector = Icons.Default.Send, contentDescription = "Add Order")
-            Spacer(modifier = Modifier.width(8.dp))
-            Text("Add Order")
+            ) {
+                Icon(imageVector = Icons.Default.Send, contentDescription = "Add Order")
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Add Order")
+            }
         }
+
     }
 }
 

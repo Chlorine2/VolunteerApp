@@ -1,6 +1,7 @@
 package com.goldden.lucck.volunteerapp.Screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.Interaction
@@ -21,6 +22,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,7 +51,10 @@ fun MonkeyScreen(){
     }
     Column(horizontalAlignment = Alignment.Start, modifier = Modifier
         .fillMaxWidth()
-        .fillMaxHeight()) {
+        .fillMaxHeight().paint(
+            painterResource(id = R.drawable.jungle),
+            contentScale = ContentScale.Crop)
+    ) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(30.dp)) {
             Image(painter = painterResource(id = R.drawable.banana), contentDescription = "banana",
                 modifier = Modifier.size(40.dp))

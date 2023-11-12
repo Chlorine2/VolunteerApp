@@ -23,9 +23,6 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = main,
-    secondary = second,
-    tertiary = surface,
     background = background
 
     /* Other default colors to override
@@ -65,7 +62,7 @@ fun VolunteerAppTheme(
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = darkColorScheme(),
         typography = Typography,
         content = content
     )
