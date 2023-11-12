@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.goldden.lucck.volunteerapp.Graphs.HomeNavGraph
 import com.goldden.lucck.volunteerapp.Graphs.ListOfScreens
+import com.goldden.lucck.volunteerapp.Models.TrackModel
 import com.goldden.lucck.volunteerapp.Navigation.BottomNavigation
 import com.goldden.lucck.volunteerapp.Screens.CreateOrderScreen
 import com.goldden.lucck.volunteerapp.Screens.MainScreen
@@ -35,7 +36,6 @@ import com.goldden.lucck.volunteerapp.Screens.MonkeyScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderDetailScreen
 import com.goldden.lucck.volunteerapp.Screens.OrderScreen
 import com.goldden.lucck.volunteerapp.Screens.ProfileScreen
-import com.goldden.lucck.volunteerapp.Screens.TrackOrderScreen
 import com.goldden.lucck.volunteerapp.ui.theme.VolunteerAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -126,7 +126,6 @@ fun BottomNavigationBar() {
                 ProfileScreen()
             }
             composable(ListOfScreens.TrackOrder.name) {
-                TrackOrderScreen()
             }
             composable("${ListOfScreens.DetailScreen.name}/{index}", arguments = listOf(
                 navArgument(name = "index"){
